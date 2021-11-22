@@ -1,0 +1,10 @@
+[
+  {
+    "source" : "www.ehanlin.com.tw/api/test/(?<path>.*)",
+    "target" : "test-app/"
+  },
+  {
+    "source" : "www.ehanlin.com.tw/api/web/(?<path>.*)",
+    "target" : "web-app/"
+  }
+]
