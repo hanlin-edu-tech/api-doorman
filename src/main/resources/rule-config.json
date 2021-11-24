@@ -1,10 +1,10 @@
 [
   {
-    "source" : "www.ehanlin.com.tw/api/test/(?<path>.*)",
-    "target" : "test-app/"
+    "path" : "localhost:8080/api/test/(?<path>.*)",
+    "origin" : "127.0.0.1:8181/${path}"
   },
   {
-    "source" : "www.ehanlin.com.tw/api/web/(?<path>.*)",
-    "target" : "web-app/"
+    "path" : "127.0.0.1:8080/api/web/(?<path>.*)",
+    "origin" : "localhost:8181/${path}"
   }
 ]

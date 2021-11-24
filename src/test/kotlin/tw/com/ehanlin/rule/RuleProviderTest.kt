@@ -17,12 +17,12 @@ class RuleProviderTest {
         val result = ruleProvider.rules()
         Assertions.assertEquals(2, result.size)
         with(result[0]) {
-            Assertions.assertEquals("www.ehanlin.com.tw/api/test/(?<path>.*)", source)
-            Assertions.assertEquals("test-app/", target)
+            Assertions.assertEquals("localhost:8080/api/test/(?<path>.*)", path)
+            Assertions.assertEquals("127.0.0.1:8181/\${path}", origin)
         }
         with(result[1]) {
-            Assertions.assertEquals("www.ehanlin.com.tw/api/web/(?<path>.*)", source)
-            Assertions.assertEquals("web-app/", target)
+            Assertions.assertEquals("127.0.0.1:8080/api/web/(?<path>.*)", path)
+            Assertions.assertEquals("localhost:8181/\${path}", origin)
         }
     }
 }
@@ -38,24 +38,24 @@ class RuleParserTest {
             """
 [
     {
-        "source" : "www.ehanlin.com.tw/api/test/(?<path>.*)",
-        "target" : "test-app/"
+        "path" : "www.ehanlin.com.tw/api/test/(?<path>.*)",
+        "origin" : "test-app/"
     },
     {
-        "source" : "www.ehanlin.com.tw/api/web/(?<path>.*)",
-        "target" : "web-app/"
+        "path" : "www.ehanlin.com.tw/api/web/(?<path>.*)",
+        "origin" : "web-app/"
     }
 ]
         """.trimIndent()
         )
         Assertions.assertEquals(2, result.size)
         with(result[0]) {
-            Assertions.assertEquals("www.ehanlin.com.tw/api/test/(?<path>.*)", source)
-            Assertions.assertEquals("test-app/", target)
+            Assertions.assertEquals("www.ehanlin.com.tw/api/test/(?<path>.*)", path)
+            Assertions.assertEquals("test-app/", origin)
         }
         with(result[1]) {
-            Assertions.assertEquals("www.ehanlin.com.tw/api/web/(?<path>.*)", source)
-            Assertions.assertEquals("web-app/", target)
+            Assertions.assertEquals("www.ehanlin.com.tw/api/web/(?<path>.*)", path)
+            Assertions.assertEquals("web-app/", origin)
         }
     }
 
@@ -64,12 +64,12 @@ class RuleParserTest {
         val result = ruleParser.parse(File("src/main/resources/rule-config.json"))
         Assertions.assertEquals(2, result.size)
         with(result[0]) {
-            Assertions.assertEquals("www.ehanlin.com.tw/api/test/(?<path>.*)", source)
-            Assertions.assertEquals("test-app/", target)
+            Assertions.assertEquals("localhost:8080/api/test/(?<path>.*)", path)
+            Assertions.assertEquals("127.0.0.1:8181/\${path}", origin)
         }
         with(result[1]) {
-            Assertions.assertEquals("www.ehanlin.com.tw/api/web/(?<path>.*)", source)
-            Assertions.assertEquals("web-app/", target)
+            Assertions.assertEquals("127.0.0.1:8080/api/web/(?<path>.*)", path)
+            Assertions.assertEquals("localhost:8181/\${path}", origin)
         }
     }
 }

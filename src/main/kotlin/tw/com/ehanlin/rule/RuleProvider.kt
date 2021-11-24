@@ -45,6 +45,6 @@ class RuleParser {
 }
 
 data class Rule(
-    val source: String,
-    val target: String
+    val path: String,
+    val origin: String
 )
