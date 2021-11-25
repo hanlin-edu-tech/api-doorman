@@ -1,0 +1,6 @@
+[
+  {
+    "path" : "localhost:8080/(?<path>.*)",
+    "origin" : "host.docker.internal:8181/${path}"
+  }
+]
