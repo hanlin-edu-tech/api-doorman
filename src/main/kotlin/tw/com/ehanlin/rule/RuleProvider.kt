@@ -1,7 +1,10 @@
 package tw.com.ehanlin.rule
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import io.quarkus.runtime.annotations.RegisterForReflection
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import java.io.File
 import javax.annotation.PostConstruct
@@ -44,7 +47,14 @@ class RuleParser {
     }
 }
 
+/**
+ * https://github.com/quarkusio/quarkus/issues/3954
+ */
+@RegisterForReflection
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Rule(
-    val path: String,
-    val origin: String
+    @JsonProperty("path")
+    var path: String = "",
+    @JsonProperty("origin")
+    var origin: String = ""
 )
