@@ -1,9 +1,9 @@
+# Deprecated, the initial performance test is much slower than nginx.
+
 # api-doorman Project
 
 * 使用 quarkus native
 * 轉址規則吃 regex 設定檔
-* log 機制應設計為可抽換，初期使用 GCP pub/sub
-* JWT驗證拆解功能
 
 ---
 
