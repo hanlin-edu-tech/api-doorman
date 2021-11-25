@@ -5,8 +5,10 @@ import io.vertx.core.Vertx
 import io.vertx.core.http.HttpClient
 import io.vertx.core.http.HttpClientRequest
 import io.vertx.core.http.RequestOptions
+import io.vertx.ext.web.AllowForwardHeaders
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
+import io.vertx.ext.web.handler.BodyHandler
 import tw.com.ehanlin.rule.RuleProvider
 import javax.annotation.PostConstruct
 import javax.enterprise.context.ApplicationScoped
@@ -29,6 +31,8 @@ class ApiDoorman {
     @PostConstruct
     fun init(@Observes router: Router) {
         proxyClient = vertx.createHttpClient()
+        router.allowForward(AllowForwardHeaders.ALL)
+        router.route().handler(BodyHandler.create())
         ruleProvider.rules().forEach { rule ->
             val pathInfo = parseUrl(rule.path)
             val originInfo = parseUrl(rule.origin)
@@ -62,17 +66,12 @@ class ApiDoorman {
             host = originInfo.host
             port = originInfo.port
             uri = originUri
-            headers = context.response().headers()
+            headers = context.request().headers()
             followRedirects = true
         }
     }
 
     private fun handleProxyRequest(context: RoutingContext, proxyRequest: HttpClientRequest) {
-        if (context.body != null) {
-            proxyRequest.end(context.body)
-        } else {
-            proxyRequest.end()
-        }
         proxyRequest.response()
             .onSuccess { proxyResponse ->
                 context.response().apply {
@@ -89,6 +88,11 @@ class ApiDoorman {
                     end("api-doorman: ${ex.message}")
                 }
             }
+
+        if (context.body != null) {
+            proxyRequest.write(context.body)
+        }
+        proxyRequest.end()
     }
 
     private val urlRegex = Regex("^(.*?)(\\:\\d*?)?(/.*)\$")
