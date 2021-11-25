@@ -1,8 +1,7 @@
 # api-doorman Project
 
-* 使用 quarkus native mutiny
-* 轉址規則吃設定檔，設定檔有順序性，越上面的優先序最高
-* 樹狀分層式的設定檔
+* 使用 quarkus native
+* 轉址規則吃 regex 設定檔
 * log 機制應設計為可抽換，初期使用 GCP pub/sub
 * JWT驗證拆解功能
 
