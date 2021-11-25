@@ -1,0 +1,34 @@
+GCP e2-standard-16 16cpu 64gb
+
+====== direct ======
+
+= init =
+Success: 10240 Avg: 8.1984375 Stdev: 15.979326591206258
+Slow: 702 Avg: 59.8960113960 Stdev: 23.5188760452255
+Failure: 0 Avg: 0 Stdev: 0
+= warmup =
+Success: 10240 Avg: 7.88291015625 Stdev: 15.25794303292512
+Slow: 726 Avg: 59.5550964187 Stdev: 14.539330542063494
+Failure: 0 Avg: 0 Stdev: 0
+
+====== api-doorman-native ======
+
+= init =
+Success: 10240 Avg: 14.951953125 Stdev: 13.788392709338005
+Slow: 112 Avg: 116.7946428571 Stdev: 57.262810973545676
+Failure: 0 Avg: 0 Stdev: 0
+= warmup =
+Success: 10240 Avg: 14.25087890625 Stdev: 10.30264982546262
+Slow: 327 Avg: 54.2354740061 Stdev: 23.839241023601772
+Failure: 0 Avg: 0 Stdev: 0
+
+====== nginx-proxy ======
+
+= init =
+Success: 10240 Avg: 9.8318359375 Stdev: 16.444309535331634
+Slow: 157 Avg: 111.9363057325 Stdev: 68.12052681420184
+Failure: 0 Avg: 0 Stdev: 0
+= warmup =
+Success: 10240 Avg: 8.7666015625 Stdev: 9.37110333243592
+Slow: 243 Avg: 54.7777777778 Stdev: 29.716845544083398
+Failure: 0 Avg: 0 Stdev: 0
