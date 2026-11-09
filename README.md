@@ -1,3 +1,24 @@
+## 使用情況調查（2026-11-09）
+
+> 本節為 hanlin-edu-tech repo 清理作業的調查紀錄，待負責人確認後決定封存或刪除。
+
+- 調查結論：未使用
+- 建議處置：刪除，理由：本 repo 是 2021-11 的反向代理原型，README 已標記 Deprecated（效能測試慢於 nginx），查無部署與引用，2021-11-25 後無活動。
+- 最後更新：pushedAt 2021-11-25；最後 commit `87aad14` 2021-11-25 hotdog929 Deprecated
+- 用途：以 Quarkus（Kotlin、native image）實作的 API 轉址代理，依 regex 設定檔（`rule-config.json`）轉送請求；`performance-testing/` 內為與 nginx 的效能比較腳本與報告。repo 內只有 Dockerfile 範本，無 cloudbuild.yaml 或部署設定。
+
+### 檢查結果
+
+| 檢查項目 | 結果 | 依據 |
+|---|---|---|
+| GitHub 活動 | 2021-11-25 後無 commit | 共 13 個 commit（2021-11-19～2021-11-25，皆為 hotdog929）；分支僅 `main`；tag 0、release 0；PR 0、issue 0；webhook 0；非 fork；Actions workflow 1 個（`Unit Test`，push 觸發，狀態 active），執行紀錄 0 筆 |
+| org 內程式碼引用 | 查無 | `gh search code --owner hanlin-edu-tech`：`api-doorman`（12 筆）、`ApiDoorman`（2 筆）全部命中本 repo |
+| GCP 部署 | 查無 | 19 個 GCP 專案的 Cloud Run、Cloud Functions、Cloud Build trigger、GCR、Artifact Registry、Cloud Scheduler、App Engine 清單與 8 個 GKE 叢集以 `doorman` 搜尋 0 筆 |
+| AWS 部署 | 查無 | 4 個 AWS 帳號的 Lambda、API Gateway（REST 與 HTTP API）、CloudFront、ECR、ECS、EventBridge、SQS、S3 以 `doorman` 搜尋 0 筆 |
+
+### 待確認事項
+- 無
+
 # Deprecated, the initial performance test is much slower than nginx.
 
 # api-doorman Project
